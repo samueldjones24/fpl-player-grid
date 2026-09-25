@@ -1,0 +1,35 @@
+.backToTop {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--powder-blue);
+  border-radius: 50%;
+  background: var(--baltic-blue);
+  color: var(--white);
+  box-shadow: var(--shadow-dropdown);
+}
+
+.backToTop:focus-visible {
+  outline: 2px solid #1c5d9966;
+  outline-offset: 2px;
+}
+
+.arrow {
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(-45deg) translate(-1px, 1px);
+}
+
+@media (max-width: 800px) {
+  .backToTop {
+    right: 16px;
+    bottom: 16px;
+  }
+}
