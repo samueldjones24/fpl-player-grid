@@ -152,6 +152,7 @@ function makeColumns(
               return (
                 <input
                   type="checkbox"
+                  id={`compare-select-${player.id}`}
                   className={styles.compareSelectCheckbox}
                   checked={selected}
                   aria-label={
@@ -686,6 +687,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
         <section className={styles.searchBar}>
           <input
             type="search"
+            id="player-search"
             value={filters.query}
             onChange={(event) =>
               setFilters((current) => ({
@@ -711,6 +713,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                 <label key={position}>
                   <input
                     type="checkbox"
+                    id={`position-filter-${position}`}
                     checked={filters.positions.includes(position)}
                     onChange={() => toggleListFilter("positions", position)}
                   />
@@ -732,6 +735,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                 <label key={id}>
                   <input
                     type="checkbox"
+                    id={`team-filter-${id}`}
                     checked={filters.teamIds.includes(id)}
                     onChange={() => toggleListFilter("teamIds", id)}
                   />
@@ -753,6 +757,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                 <label key={status}>
                   <input
                     type="checkbox"
+                    id={`status-filter-${status}`}
                     checked={filters.statuses.includes(status)}
                     onChange={() => toggleListFilter("statuses", status)}
                   />
@@ -769,6 +774,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                 Min{" "}
                 <input
                   type="number"
+                  id="price-min"
                   step="0.1"
                   value={filters.ranges.price?.min ?? ""}
                   onChange={(event) =>
@@ -780,6 +786,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                 Max{" "}
                 <input
                   type="number"
+                  id="price-max"
                   step="0.1"
                   value={filters.ranges.price?.max ?? ""}
                   onChange={(event) =>
@@ -808,6 +815,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                     Min{" "}
                     <input
                       type="number"
+                      id={`${key}-min`}
                       step="0.1"
                       value={filters.ranges[key]?.min ?? ""}
                       onChange={(event) =>
@@ -819,6 +827,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                     Max{" "}
                     <input
                       type="number"
+                      id={`${key}-max`}
                       step="0.1"
                       value={filters.ranges[key]?.max ?? ""}
                       onChange={(event) =>
@@ -914,6 +923,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                     >
                       <input
                         type="checkbox"
+                        id={`column-${column.key}`}
                         checked={columnVisibility[column.key] !== false}
                         onChange={() =>
                           setColumnVisibility((current) => ({

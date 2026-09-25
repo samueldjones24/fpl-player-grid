@@ -12,6 +12,8 @@
   --font-size-xs: 11px;
   --font-size-sm: 12px;
   --font-size-md: 13px;
+  --font-weight-regular: 500;
+  --font-weight-semibold: 700;
   --font-weight-bold: 800;
   --letter-spacing-wide: 0.07em;
   --letter-spacing-wider: 0.08em;
@@ -57,7 +59,7 @@ button {
 .eyebrow {
   color: var(--baltic-blue);
   font-size: var(--font-size-sm);
-  font-weight: 800;
+  font-weight: var(--font-weight-bold);
   letter-spacing: 0.12em;
   margin: 0 0 12px;
 }
@@ -109,7 +111,7 @@ label {
   gap: 7px;
   color: #536274;
   font-size: 11px;
-  font-weight: 750;
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -143,7 +145,7 @@ button:focus-visible {
   background: var(--baltic-blue);
   color: var(--white);
   padding: 10px 18px;
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 @media (max-width: 800px) {
   .app-shell {

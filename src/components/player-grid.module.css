@@ -74,7 +74,7 @@
   border: 1px solid var(--powder-blue);
   color: var(--carbon-black);
   font-size: var(--font-size-md);
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
   padding: 9px 12px;
   min-height: 36px;
   background: var(--white);
@@ -132,7 +132,7 @@
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: var(--font-weight-regular);
   text-transform: none;
   letter-spacing: 0;
   color: var(--carbon-black);
@@ -164,6 +164,13 @@
   min-width: 520px;
 }
 
+@media (max-width: 560px) {
+  .rangeMenuGrid {
+    grid-template-columns: 1fr;
+    min-width: 260px;
+  }
+}
+
 .rangeMenu fieldset {
   border: 1px solid var(--powder-blue);
   padding: 8px;
@@ -173,7 +180,7 @@
 
 .rangeMenu legend {
   font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-muted);
   padding: 0 4px;
 }
@@ -207,7 +214,7 @@
 .columnSummaryHint {
   color: #68798b;
   font-size: var(--font-size-xs);
-  font-weight: 500;
+  font-weight: var(--font-weight-regular);
   margin-left: 4px;
 }
 
@@ -238,7 +245,7 @@
   background: var(--powder-blue-tint, #eef3fa);
   color: var(--carbon-black);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   padding: 6px 10px;
 }
 
@@ -246,7 +253,7 @@
   border: 0 !important;
   background: none !important;
   color: var(--baltic-blue) !important;
-  font-weight: 700 !important;
+  font-weight: var(--font-weight-semibold) !important;
   text-decoration: underline;
 }
 
@@ -280,7 +287,7 @@
   color: var(--baltic-blue);
   padding: 0;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .toolbar {
@@ -318,7 +325,7 @@
   background: var(--color-panel-tint);
   color: var(--color-heading-muted);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-wide);
 }
 
@@ -520,7 +527,7 @@
   place-items: center;
   min-height: 22px;
   font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .fixtureRating[data-difficulty="1"] {
@@ -670,7 +677,7 @@
   background: var(--baltic-blue);
   color: var(--white);
   padding: 8px 12px;
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .playerCell {
@@ -690,7 +697,7 @@
 .playerCell small {
   color: #8995a2;
   font-size: var(--font-size-2xs);
-  font-weight: 500;
+  font-weight: var(--font-weight-regular);
 }
 
 .statusDot {
@@ -759,7 +766,7 @@
   box-shadow: var(--shadow-dropdown);
   color: var(--carbon-black);
   font-size: var(--font-size-xs);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   line-height: 1.4;
   white-space: normal;
   opacity: 0;
@@ -814,7 +821,7 @@
   background: var(--baltic-blue);
   color: var(--white);
   padding: 9px 16px;
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .compareSelectCheckbox {
@@ -873,14 +880,14 @@
   color: var(--carbon-black);
   padding: 6px 10px;
   font-size: var(--font-size-sm);
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .selectionNote {
   margin: 0;
   color: var(--baltic-blue);
   font-size: var(--font-size-sm);
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .compareButton {
@@ -889,7 +896,7 @@
   color: var(--white);
   padding: 10px 16px;
   font-size: var(--font-size-md);
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .compareButton:disabled {
@@ -945,7 +952,7 @@
 .comparisonHeaderSubtitle {
   color: var(--color-text-muted);
   font-size: var(--font-size-md);
-  font-weight: 500;
+  font-weight: var(--font-weight-regular);
   margin: 0;
 }
 
@@ -1110,7 +1117,7 @@
   color: var(--carbon-black);
   padding: 6px 8px;
   font-size: var(--font-size-xs);
-  font-weight: 700;
+  font-weight: var(--font-weight-semibold);
 }
 
 .metricButtonActive {
