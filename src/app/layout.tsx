@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     title: "FPL Player Grid",
     description: "A better way to compare FPL players",
     type: "website",
-    images: [{ url: "/logo.png", width: 1184, height: 1109, alt: "FPL Player Grid logo" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "FPL Player Grid logo" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "FPL Player Grid",
     description: "A better way to compare FPL players",
-    images: ["/logo.png"],
+    images: ["/og-image.png"],
   },
 };
 
