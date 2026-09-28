@@ -672,6 +672,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
               width={72}
               height={68}
               className="heading-logo"
+              priority
             />
             <div className="heading-copy">
               <h1>FPL Player Grid</h1>

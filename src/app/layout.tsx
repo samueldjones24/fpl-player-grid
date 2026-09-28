@@ -13,24 +13,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FPL Player Grid",
-  description: "A better way to compare FPL players",
+  title: "FPL Player Grid | Player Stats & Comparison Tool",
+  description:
+    "Dive deeper into Fantasy Premier League player stats. Better search, filter, and comparison of points, form, fixtures, history, and more.",
   metadataBase: new URL("https://fpl-player-grid.com"),
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/logo.svg",
     shortcut: "/logo.svg",
     apple: "/logo.svg",
   },
   openGraph: {
-    title: "FPL Player Grid",
-    description: "A better way to compare FPL players",
+    title: "FPL Player Grid | Player Stats & Comparison Tool",
+    description:
+      "Dive deeper into Fantasy Premier League player stats. Better search, filter, and comparison of points, form, fixtures, history, and more.",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "FPL Player Grid logo" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FPL Player Grid",
-    description: "A better way to compare FPL players",
+    title: "FPL Player Grid | Player Stats & Comparison Tool",
+    description:
+      "Dive deeper into Fantasy Premier League player stats. Better search, filter, and comparison of points, form, fixtures, history, and more.",
     images: ["/og-image.png"],
   },
 };

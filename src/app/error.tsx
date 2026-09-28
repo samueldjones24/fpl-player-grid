@@ -24,7 +24,7 @@ export default function Error({
         </div>
       </div>
       <h1>Player data is temporarily unavailable.</h1>
-      <p className="lede">Check the FPL API connection, then try again.</p>
+      <p className="lede">Please check your connection, then try again.</p>
       <button onClick={reset}>Retry</button>
     </main>
   );
