@@ -25,7 +25,6 @@
 .dropdown summary,
 .filterMenu,
 .rangeMenu,
-.columnMenu,
 .activeFilters button,
 .tableWrap,
 .emptyState,
@@ -108,8 +107,7 @@
 }
 
 .filterMenu,
-.rangeMenu,
-.columnMenu {
+.rangeMenu {
   position: absolute;
   z-index: 4;
   top: calc(100% + 6px);
@@ -206,32 +204,6 @@
   min-height: 32px;
 }
 
-.columnMenu {
-  grid-template-columns: 1fr 1fr;
-  min-width: 300px;
-}
-
-.columnSummaryHint {
-  color: #68798b;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-regular);
-  margin-left: 4px;
-}
-
-.columnGroup {
-  display: contents;
-}
-
-.columnGroupLabel {
-  grid-column: 1 / -1;
-  color: var(--color-heading-muted);
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-wide);
-  margin: 6px 0 0;
-}
-
 .activeFilters {
   display: flex;
   flex-wrap: wrap;
@@ -288,13 +260,6 @@
   padding: 0;
   font-size: 12px;
   font-weight: var(--font-weight-semibold);
-}
-
-.toolbar {
-  border-top: 1px solid var(--powder-blue);
-  border-bottom: 1px solid var(--powder-blue);
-  padding: 10px 2px;
-  margin-bottom: 14px;
 }
 
 .tableWrap {

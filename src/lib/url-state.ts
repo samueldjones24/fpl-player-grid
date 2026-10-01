@@ -14,7 +14,6 @@ export const DEFAULT_SORT: SortRule[] = [];
 export interface GridUrlState {
   filters: PlayerFilters;
   sorting: SortRule[];
-  hiddenColumns: string[];
 }
 
 function parseEnumList<T extends string>(
@@ -87,16 +86,11 @@ export function parseGridUrlState(searchParams: URLSearchParams): GridUrlState {
 
   const sorting = parseSorting(searchParams.get("sort"));
 
-  const hiddenColumns = (searchParams.get("hide") ?? "")
-    .split(",")
-    .map((key) => key.trim())
-    .filter(Boolean);
-
-  return { filters, sorting, hiddenColumns };
+  return { filters, sorting };
 }
 
 export function buildGridSearchParams(state: GridUrlState): URLSearchParams {
-  const { filters, sorting, hiddenColumns } = state;
+  const { filters, sorting } = state;
   const params = new URLSearchParams();
 
   if (filters.positions.length) params.set("pos", filters.positions.join(","));
@@ -123,8 +117,6 @@ export function buildGridSearchParams(state: GridUrlState): URLSearchParams {
         .join(","),
     );
   }
-
-  if (hiddenColumns.length) params.set("hide", hiddenColumns.join(","));
 
   return params;
 }

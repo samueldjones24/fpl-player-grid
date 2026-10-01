@@ -11,7 +11,6 @@ describe("parseGridUrlState", () => {
     const state = parseGridUrlState(new URLSearchParams());
     expect(state.filters).toEqual(EMPTY_FILTERS);
     expect(state.sorting).toEqual(DEFAULT_SORT);
-    expect(state.hiddenColumns).toEqual([]);
   });
 
   it("parses filters, ranges, sort, and hidden columns", () => {
@@ -34,7 +33,6 @@ describe("parseGridUrlState", () => {
       { id: "points", desc: true },
       { id: "minutes", desc: false },
     ]);
-    expect(state.hiddenColumns).toEqual(["xG", "xA"]);
   });
 
   it("treats a missing sort param as the default sort even when other params exist", () => {
@@ -57,11 +55,10 @@ describe("parseGridUrlState", () => {
 });
 
 describe("buildGridSearchParams", () => {
-  it("omits all params for empty filters, cleared sort, and no hidden columns", () => {
+  it("omits all params for empty filters and cleared sort", () => {
     const params = buildGridSearchParams({
       filters: EMPTY_FILTERS,
       sorting: [],
-      hiddenColumns: [],
     });
 
     expect(params.toString()).toBe("");
@@ -83,7 +80,6 @@ describe("buildGridSearchParams", () => {
         { id: "points", desc: true },
         { id: "minutes", desc: false },
       ],
-      hiddenColumns: ["xG", "xA"],
     };
 
     const params = buildGridSearchParams({
@@ -93,12 +89,10 @@ describe("buildGridSearchParams", () => {
         statuses: [...state.filters.statuses],
       },
       sorting: state.sorting,
-      hiddenColumns: state.hiddenColumns,
     });
     const parsed = parseGridUrlState(params);
 
     expect(parsed.filters).toEqual(state.filters);
     expect(parsed.sorting).toEqual(state.sorting);
-    expect(parsed.hiddenColumns).toEqual(state.hiddenColumns);
   });
 });

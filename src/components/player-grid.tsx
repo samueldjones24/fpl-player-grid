@@ -11,7 +11,6 @@ import {
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
-  columnVisibilityFeature,
   createColumnHelper,
   rowSortingFeature,
   tableFeatures,
@@ -45,14 +44,12 @@ import {
 } from "@/lib/player-comparison";
 import {
   PLAYER_STAT_DEFINITIONS,
-  STAT_GROUP_LABELS,
   type PlayerStatDefinition,
   type PlayerStatKey,
-  type StatGroup,
 } from "@/lib/player-stats";
 import styles from "./player-grid.module.css";
 
-const features = tableFeatures({ rowSortingFeature, columnVisibilityFeature });
+const features = tableFeatures({ rowSortingFeature });
 type Features = typeof features;
 const columnHelper = createColumnHelper<Features, Player>();
 
@@ -66,14 +63,6 @@ const STATUS_LABELS: Record<PlayerStatus, string> = {
 };
 const STAT_COLUMNS = PLAYER_STAT_DEFINITIONS;
 const comparisonSummaryRequests = new Map<number, Promise<PlayerSummary>>();
-const STAT_GROUPS: StatGroup[] = [
-  "core",
-  "attacking",
-  "defending",
-  "bonus",
-  "ict",
-  "ownership",
-];
 const statByKey = new Map(STAT_COLUMNS.map((column) => [column.key, column]));
 const getStatDescription = (key: PlayerStatKey) => {
   const stat = statByKey.get(key);
@@ -326,13 +315,6 @@ export function PlayerGrid({ players }: { players: Player[] }) {
   const [comparisonSorting, setComparisonSorting] = useState<SortRule[]>([
     { id: "points", desc: true },
   ]);
-  const [columnVisibility, setColumnVisibility] = useState<
-    Record<string, boolean>
-  >(() =>
-    Object.fromEntries(
-      initialUrlState.hiddenColumns.map((key) => [key, false]),
-    ),
-  );
   const [expandedPlayerIds, setExpandedPlayerIds] = useState<number[]>([]);
   const [expandedPlayerId, setExpandedPlayerId] = useState<number | null>(null);
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
@@ -474,15 +456,12 @@ export function PlayerGrid({ players }: { players: Player[] }) {
   }, []);
 
   useEffect(() => {
-    const hiddenColumns = Object.entries(columnVisibility)
-      .filter(([, visible]) => visible === false)
-      .map(([key]) => key);
-    const params = buildGridSearchParams({ filters, sorting, hiddenColumns });
+    const params = buildGridSearchParams({ filters, sorting });
     const queryString = params.toString();
     router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
       scroll: false,
     });
-  }, [filters, sorting, columnVisibility, pathname, router]);
+  }, [filters, sorting, pathname, router]);
 
   const pendingComparisonIds = useMemo(
     () =>
@@ -620,27 +599,15 @@ export function PlayerGrid({ players }: { players: Player[] }) {
   }, [filters, teamNameById]);
 
   const filtersActive = hasActiveFilters(filters);
-  const visibleColumnCount = useMemo(
-    () =>
-      4 +
-      STAT_COLUMNS.length -
-      Object.values(columnVisibility).filter((visible) => visible === false)
-        .length,
-    [columnVisibility],
-  );
 
   const table = useTable({
     features,
     columns,
     data: rows,
-    state: { sorting, columnVisibility },
+    state: { sorting },
     manualSorting: true,
     onSortingChange: (updater) =>
       setSorting((current) =>
-        typeof updater === "function" ? updater(current) : updater,
-      ),
-    onColumnVisibilityChange: (updater) =>
-      setColumnVisibility((current) =>
         typeof updater === "function" ? updater(current) : updater,
       ),
     enableMultiSort: true,
@@ -651,7 +618,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
     features,
     columns: comparisonColumns,
     data: comparisonRows,
-    state: { sorting: comparisonSorting, columnVisibility: {} },
+    state: { sorting: comparisonSorting },
     manualSorting: true,
     onSortingChange: (updater) =>
       setComparisonSorting((current) =>
@@ -899,50 +866,6 @@ export function PlayerGrid({ players }: { players: Player[] }) {
         </div>
       </section>
 
-      <section className={styles.toolbar}>
-        <details className={styles.dropdown}>
-          <summary>
-            Columns{" "}
-            <span className={styles.muted}>{visibleColumnCount} shown</span>
-            <span className={styles.columnSummaryHint}>
-              Choose which stats appear in the player table.
-            </span>
-          </summary>
-          <div className={`${styles.filterMenu} ${styles.columnMenu}`}>
-            {STAT_GROUPS.map((group) => (
-              <div key={group} className={styles.columnGroup}>
-                <p className={styles.columnGroupLabel}>
-                  {STAT_GROUP_LABELS[group]}
-                </p>
-                {STAT_COLUMNS.filter((column) => column.group === group).map(
-                  (column) => (
-                    <label
-                      key={column.key}
-                      title={
-                        "description" in column ? column.description : undefined
-                      }
-                    >
-                      <input
-                        type="checkbox"
-                        id={`column-${column.key}`}
-                        checked={columnVisibility[column.key] !== false}
-                        onChange={() =>
-                          setColumnVisibility((current) => ({
-                            ...current,
-                            [column.key]: current[column.key] === false,
-                          }))
-                        }
-                      />
-                      {column.label}
-                    </label>
-                  ),
-                )}
-              </div>
-            ))}
-          </div>
-        </details>
-      </section>
-
       {selectedIds.length > 0 && (
         <aside className={styles.comparisonTray} aria-label="Comparison tray">
           <div className={styles.comparisonTrayHeader}>
@@ -1057,7 +980,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
               {table.getRowModel().rows.map((row) => (
                 <Fragment key={row.id}>
                   <tr>
-                    {row.getVisibleCells().map((cell) => (
+                    {row.getAllCells().map((cell) => (
                       <td
                         key={cell.id}
                         className={
@@ -1165,7 +1088,7 @@ export function PlayerGrid({ players }: { players: Player[] }) {
                 <tbody>
                   {comparisonTable.getRowModel().rows.map((row) => (
                     <tr key={row.id}>
-                      {row.getVisibleCells().map((cell) => (
+                      {row.getAllCells().map((cell) => (
                         <td
                           key={cell.id}
                           className={
