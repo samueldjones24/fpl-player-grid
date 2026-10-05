@@ -131,7 +131,6 @@ function makeColumns(
           columnHelper.display({
             id: "select",
             header: "Compare",
-            enableHiding: false,
             enableSorting: false,
             cell: (info) => {
               const player = info.row.original;
@@ -171,7 +170,6 @@ function makeColumns(
           columnHelper.display({
             id: "expander",
             header: "",
-            enableHiding: false,
             enableSorting: false,
             cell: (info) => {
               const player = info.row.original;
@@ -198,7 +196,6 @@ function makeColumns(
     columnHelper.accessor((player) => player.webName, {
       id: "player",
       header: "Player",
-      enableHiding: false,
       cell: (info) => {
         const player = info.row.original;
         const isUnavailable = player.status !== "a";
@@ -222,7 +219,6 @@ function makeColumns(
     columnHelper.accessor("position", {
       id: "position",
       header: "Pos",
-      enableHiding: false,
       enableSorting: false,
       cell: (info) => (
         <span className={styles.position}>{info.getValue()}</span>
@@ -231,7 +227,6 @@ function makeColumns(
     columnHelper.accessor("team", {
       id: "team",
       header: "Team",
-      enableHiding: false,
       enableSorting: false,
     }),
     columnHelper.accessor((player) => player.nextFixtures.length, {
